@@ -1,0 +1,14 @@
+Metric Name,Category,Formula,Description
+Total Spend,Base Metric,SUM(Spend),The total advertising cost across selected dimensions.
+Total Impressions,Base Metric,SUM(Impressions),The total number of times ad creatives were displayed.
+Total Clicks,Base Metric,SUM(Clicks),The total number of user clicks on ads.
+Total Conversions,Base Metric,SUM(Conversions),The total volume of desired actions (purchases/leads) generated.
+Total Revenue,Base Metric,SUM(Revenue),Total gross revenue attributed to marketing efforts.
+Click-Through Rate (CTR),Efficiency Ratio,DIVIDE(SUM(Clicks), SUM(Impressions)),Measures how engaging ad creative is. Expressed as a percentage.
+Conversion Rate (CVR),Efficiency Ratio,DIVIDE(SUM(Conversions), SUM(Clicks)),Measures effectiveness of landing pages at converting traffic. Expressed as a percentage.
+Cost Per Click (CPC),Cost Efficiency,DIVIDE(SUM(Spend), SUM(Clicks)),The average cost paid per user click.
+Cost Per Acquisition (CPA),Cost Efficiency,DIVIDE(SUM(Spend), SUM(Conversions)),The average cost to acquire a single conversion/customer.
+Return on Ad Spend (ROAS),Financial,DIVIDE(SUM(Revenue), SUM(Spend)),Revenue generated for every dollar spent. Important: Displayed as a decimal multiplier (e.g., 2.5x).
+Target ROAS Achievement,Goal Tracking,IF(ROAS >= Target_ROAS, "Met", "Missed"),Compares actual ROAS to the target set in dim_targets.
+Target CPA Variance %,Goal Tracking,DIVIDE(Target_CPA - CPA, Target_CPA),How far above or below target cost the campaign operated. Positive is good (came in under budget).
+Blended ROAS,Executive Financial,DIVIDE(Total_Company_Revenue, Total_Marketing_Spend),Also known as MER (Marketing Efficiency Ratio). Overall view of marketing impact on total business revenue.
