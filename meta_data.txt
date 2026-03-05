@@ -1,0 +1,62 @@
+# Marketing Domain Project - Data Dictionary
+
+This document defines the structure and contents of the 7 generated CSV files for the Marketing Performance project. This follows a Dimensional Modeling (Star Schema) approach with multiple Fact tables.
+
+---
+
+## 1. dim_campaigns.csv
+Contains metadata about each marketing campaign.
+*   **campaign_id**: Unique identifier for the campaign (e.g., CMP_101).
+*   **campaign_name**: The descriptive name of the campaign.
+*   **objective**: The primary goal of the campaign (e.g., Awareness, Conversion, Retargeting).
+*   **target_audience**: The specific audience segment targeted (e.g., Broad, Lookalike 1%, Warm Leads).
+
+## 2. dim_channels.csv
+Lists the various marketing channels and their categorizations.
+*   **channel_id**: Unique identifier for the marketing channel (e.g., CH_01).
+*   **channel_name**: The specific platform and tactic (e.g., Google Search - Brand).
+*   **category**: The broader grouping of the channel (e.g., Paid Search, Social Media).
+
+## 3. dim_creatives.csv
+Details the specific ad creatives used in the campaigns.
+*   **creative_id**: Unique identifier for the creative asset (e.g., CR_001).
+*   **creative_name**: Descriptive name of the specific ad format/image/video.
+*   **format**: The media type of the creative (e.g., Video, Image, Carousel, Text).
+
+## 4. dim_date.csv
+Standard calendar dimension table for time-based analysis.
+*   **date**: The specific date in YYYY-MM-DD format.
+*   **month**: The 3-letter abbreviation of the month (e.g., Jan).
+*   **year**: The 4-digit year.
+*   **quarter**: The calendar quarter (e.g., Q1).
+*   **is_weekend**: Boolean flag (1 = Weekend, 0 = Weekday).
+
+## 5. dim_targets.csv
+Stores the goal KPIs established by marketing leadership for each campaign.
+*   **campaign_id**: Foreign key linking to dim_campaigns.
+*   **target_roas**: The Return on Ad Spend goal multiplier (e.g., 3.0 means $3 revenue for every $1 spent).
+*   **target_cpa**: The Cost Per Acquisition goal (e.g., $45.00 means willing to spend up to $45 to get one purchase).
+
+---
+
+## 6. fact_marketing_performance.csv
+The primary aggregate fact table tracking daily ad spend and top-of-funnel metrics.
+*   **date**: Foreign key to dim_date.
+*   **campaign_id**: Foreign key to dim_campaigns.
+*   **channel_id**: Foreign key to dim_channels.
+*   **creative_id**: Foreign key to dim_creatives.
+*   **spend**: Total amount spent ($) on this combination of dimensions for the given day.
+*   **impressions**: Total number of times the ad was shown.
+*   **clicks**: Total number of times the ad was clicked.
+
+## 7. fact_conversions.csv
+A transactional fact table tracking individual successful customer actions (purchases) driven by the ads.
+*   **conversion_id**: A unique transactional ID for every single purchase event.
+*   **date**: Foreign key to dim_date.
+*   **campaign_id**: Foreign key to dim_campaigns.
+*   **channel_id**: Foreign key to dim_channels.
+*   **revenue_generated**: The specific gross revenue ($) generated from this single transaction.
+
+---
+### Note on Power BI Modeling
+To analyze ROAS and CPA correctly, analysts must join `dim_campaigns`, `dim_channels`, `dim_creatives`, and `dim_date` to BOTH `fact_marketing_performance` and `fact_conversions`.

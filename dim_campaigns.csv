@@ -1,0 +1,6 @@
+campaign_id,campaign_name,objective,target_audience
+CMP_101,Spring Forward 2026,Conversion,Broad
+CMP_102,Brand Awareness Q1,Awareness,Lookalike 1%
+CMP_103,Cart Abandonment,Retargeting,Warm Leads
+CMP_104,Summer Blowout Promo,Conversion,Past Purchasers
+CMP_105,Newsletter Reactivation,Retention,Subscribers
